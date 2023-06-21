@@ -1,6 +1,7 @@
 package edu.quotaservice;
 
 import edu.quotaservice.model.Quota;
+import edu.quotaservice.service.QuotaService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,19 +14,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuotaController {
 
+    private static  QuotaService quotaService;
+
     @GetMapping("/{code}")
-    public Quota getQuotasByCode(@PathVariable int code) {
-        return  new Quota(); //TODO
+    public Quota getQuotaByCode(@PathVariable int code) {
+        return  quotaService.getByCode(code);
     }
 
     @GetMapping("/{userid}")
     public List<Quota> getQuotasByUserId(@PathVariable int userid) {
-        return  new ArrayList<Quota>(); //TODO
+        return  quotaService.getByUserId(userid);
     }
 
     @PostMapping("/{userid}")
     public Quota getQuotasByUserIdAndCode(@PathVariable int userid, @RequestBody int code ) {
-        return  new Quota(); //TODO
+        return quotaService.getByUserIdAndCode(userid, code);
     }
 
 }
